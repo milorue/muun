@@ -5,6 +5,7 @@ import {Route, Link, BrowserRouter} from 'react-router-dom'
 import Login from "./pages/login";
 import {Dog, Cat} from './pages/components'
 import Signup from "./pages/signup";
+import Confirm from "./pages/confirm";
 
 import logo from './assets/app_logo.png'
 
@@ -34,6 +35,7 @@ const routes = (
            <Route exact path="/muun/" component={Login} />
            <Route path={'/muun/signup'} component={Signup}/>
            <Route path={'/muun/dog'} component={Dog}/>
+           <Route path={'/muun/confirm'} component={Confirm}/>
        </div>
     </BrowserRouter>
 )

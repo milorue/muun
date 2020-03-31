@@ -4,6 +4,8 @@ import {Stitch, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProvi
 
 import {Button, Grid, Box, Typography, TextField, Link, DialogTitle} from "@material-ui/core";
 
+import Dialog from "@material-ui/core/Dialog";
+
 import logo from '../assets/app_logo.png'
 import logo_md from '../assets/logo_med.png'
 
@@ -19,8 +21,27 @@ class Signup extends Component{
             password: '',
             cpassword: 's',
             confirmed: false,
-            errorText: "Passwords don't match"
+            errorText: "Passwords don't match",
+            confirmDialog: false,
         }
+    }
+
+    showConfirmDialog(){
+
+        const handleClose = () =>{
+            this.setState({confirmDialog: false})
+        }
+
+        return(
+            <Dialog open={this.state.confirmDialog} onClose={handleClose} aria-labelledby={'confirm-account-dialog'} className={'account-dialog'}>
+                <DialogTitle id={'account-dialog-title'}>Confirmation Email</DialogTitle>
+                <Typography variant={'body2'} align={'center'} style={{padding: 10}}>
+                    {'A confirmation email has been sent to ' + this.state.email}
+                </Typography>
+                <Button variant={'contained'} color={'primary'} style={{backgroundColor: '#667999', margin: 20}} onClick={handleClose}>
+                    Ok</Button>
+            </Dialog>
+        )
     }
 
     showCopyrightInfo(){
@@ -120,8 +141,8 @@ class Signup extends Component{
             console.log('creating account')
             client.registerWithEmail(this.state.email, this.state.password)
                 .then(() =>{
-                    console.log('account success for: ' + this.state.email + 'with id: ')
-                    this.handleLoginAccount;
+                    console.log('account success for: ' + this.state.email)
+                    this.setState({confirmDialog: true}) // sets confirmation dialog visible
                 })
                 .catch(err =>{
                     console.error('account error: ' + err)
@@ -131,11 +152,17 @@ class Signup extends Component{
             console.log('error creating account')
         }
 
+    };
+
+    showDialog = () =>{
+        this.setState({
+            confirmDialog: true,
+        })
     }
 
     render(){
         return(
-            <Box style={{alignItems: 'stretch', minHeight: 200}} className={'container'}>
+            <Box style={{alignItems: 'stretch'}} className={'container'}>
 
                 <Grid container spacing={2} style={{flexGrow: 1}} alignContent={'stretch'}>
 
@@ -197,7 +224,7 @@ class Signup extends Component{
                     {/*Utility grid config*/}
                     <Grid item xs={1} sm={1} md={3} lg={4} xl={5}/>
                     <Grid item xs={5} sm={5} md={3} lg={2} xl={1} style={{textAlign: 'center'}}>
-                        <Button style={{fontSize: 12}}>Recover Lost Account</Button>
+                        <Button style={{fontSize: 12}} onClick={this.showDialog}>Recover Lost Account</Button>
                     </Grid>
 
                     <Grid item xs={5} sm={5} md={3} lg={2} xl={1} style={{textAlign: 'center'}}>
@@ -209,8 +236,9 @@ class Signup extends Component{
                         {this.showCopyrightInfo()}
                     </Grid>
 
-
                 </Grid>
+
+                {this.showConfirmDialog()}
             </Box>
         )
     }

@@ -2,3 +2,7 @@
     overflow: hidden;
     height: auto;
 }
+
+.account-dialog{
+    padding: 20px;
+}
