@@ -1,0 +1,21 @@
+{
+  "name": "muun",
+  "version": "0.1.0",
+  "private": true,
+  "homepage": "https://milorue.github.io/muun",
+  "dependencies": {
+    "@material-ui/core": "latest",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-router-dom": "^5.1.2",
+    "react-scripts": "0.9.5",
+    "mongodb-stitch-browser-sdk": "latest"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
