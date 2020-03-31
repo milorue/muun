@@ -2,7 +2,7 @@
   "name": "muun",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://milorue.github.io/muun",
+  "homepage": "https://milorue.github.io/muun/",
   "dependencies": {
     "@material-ui/core": "latest",
     "react": "^16.13.1",
