@@ -73,7 +73,7 @@ class Signup extends Component{
     }
 
     handleLoginAccount = () =>{
-        this.props.history.push('/')
+        this.props.history.push('/muun')
     }
 
     handleUsername = (event) =>{

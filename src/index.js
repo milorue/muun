@@ -26,14 +26,14 @@ const routes = (
                <Toolbar>
 
                    <Typography variant="h6">
-                       <Link style={{color: 'white', textDecoration: 'none', marginRight: window.innerWidth/50}} to="/"><img src={logo} style={{marginRight: 20}}/></Link>
+                       <Link style={{color: 'white', textDecoration: 'none', marginRight: window.innerWidth/50}} to="/muun"><img src={logo} style={{marginRight: 20}}/></Link>
                    </Typography>
                </Toolbar>
            </AppBar>
 
-           <Route exact path="/" component={Login} />
-           <Route path={'/signup'} component={Signup}/>
-           <Route path={'/dog'} component={Dog}/>
+           <Route exact path="/muun" component={Login} />
+           <Route path={'/muun/signup'} component={Signup}/>
+           <Route path={'/muun/dog'} component={Dog}/>
        </div>
     </BrowserRouter>
 )
