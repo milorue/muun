@@ -19,10 +19,17 @@ class Signup extends Component{
             username: '',
             email: '',
             password: '',
-            cpassword: 's',
+            cpassword: '',
             confirmed: false,
-            errorText: "Passwords don't match",
+
             confirmDialog: false,
+            errorDialog: false,
+
+            passwordError: "",
+            usernameError: "",
+            emailError: "",
+            fNameError: '',
+            lNameError: '',
         }
     }
 
@@ -42,6 +49,23 @@ class Signup extends Component{
                     Ok</Button>
             </Dialog>
         )
+    };
+
+    showErrorDialog(){
+        const handleClose = () =>{
+            this.setState({errorDialog: false})
+        }
+
+        return(
+            <Dialog open={this.state.errorDialog} onClose={handleClose} aria-labelledby={'error-account-dialog'} className={'error-dialog'}>
+                <DialogTitle id={'account-error-title'}>Error</DialogTitle>
+                <Typography variant={'body2'} align={'center'} style={{padding: 10}}>
+                    There was an error when creating your account, please double check your information.
+                </Typography>
+                <Button variant={'contained'} color={'primary'} style={{backgroundColor: '#C84237', margin: 20}} onClick={handleClose}>
+                    Close</Button>
+            </Dialog>
+        )
     }
 
     showCopyrightInfo(){
@@ -58,43 +82,133 @@ class Signup extends Component{
     }
 
     componentDidMount() {
+        const client = Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory);
 
-    }
+    };
 
-    confirmCredentials(){
+    confirmCredentials() {
+
+        this.validateUsername(this.state.username)
+        this.validatePassword(this.state.password, this.state.cpassword)
+        this.validateFName(this.state.fname)
+        this.validateLName(this.state.lname)
+        this.validateEmail(this.state.email)
+
+        if (this.validateEmail(this.state.email) &&
+            this.validatePassword(this.state.password, this.state.cpassword) &&
+            this.validateUsername(this.state.username) &&
+            this.validateFName(this.state.fname) &&
+            this.validateLName(this.state.lname)) {
 
 
-        if(this.state.cpassword === this.state.password && this.state.username !== '' && this.state.password !== ''){
+
             this.setState({
                 confirmed: true,
-                errorText: "Matched"
+            });
+            return true
+        }
+        else{
+
+
+            this.setState({
+                confirmed: false,
+            });
+            this.setState({errorDialog: true})
+            return false
+        }
+    }
+
+
+
+    validateUsername(username){
+
+        console.log(username.length)
+        if(username.length < 4){
+            this.setState({
+                usernameError: "Username must be at least 4 characters long"
             })
-            console.log('confirmed password')
-            if(this.validateEmail(this.state.email)){
-                return true
-            }
-            else{
-                console.log('invalid email')
-                return false
-            }
+            return false
         }
         else{
             this.setState({
-                confirmed: false,
-                errorText: "Passwords don't match"
+                usernameError: ""
             })
-            console.log("invalid password or don't match")
+            return true
+        }
+    }
+
+    validatePassword(pass, cpass){
+        if(pass !== cpass){
+            this.setState({
+                passwordError: "Passwords don't match",
+            });
+
             return false
+        }
+
+        else if (pass.length <= 6 || cpass.length <= 6){
+            this.setState({
+                passwordError: "Passwords must be 6 characters or more"
+            })
+            return false
+        }
+
+        else{
+            this.setState({
+                passwordError: ""
+            })
+            return true
         }
     }
 
     validateEmail(address){
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        return re.test(String(address).toLowerCase());
+        if(!re.test(String(address).toLowerCase())){
+            this.setState({
+                emailError: 'Invalid email address'
+            })
+            return true
+        }
+        else{
+            this.setState({
+                emailError: ''
+            })
+            return false
+        }
+    }
+
+    validateFName(fName){
+        if(fName === ''){
+            this.setState({
+                fNameError: 'Required'
+            })
+            return false
+        }
+        else{
+            this.setState({
+                fNameError: ''
+            })
+            return true
+        }
+    }
+
+    validateLName(lName){
+        if(lName === ''){
+            this.setState({
+                lNameError: 'Required'
+            })
+            return false
+        }
+        else{
+            this.setState({
+                lNameError: ''
+            })
+            return true
+        }
     }
 
     handleLoginAccount = () =>{
-        this.props.history.push('/muun/')
+        this.props.history.push('/')
     }
 
     handleUsername = (event) =>{
@@ -154,6 +268,10 @@ class Signup extends Component{
 
     };
 
+    handleForgotten = () =>{
+        this.props.history.push('/forgot')
+    }
+
     showDialog = () =>{
         this.setState({
             confirmDialog: true,
@@ -176,12 +294,12 @@ class Signup extends Component{
                     <Grid item xs={false} sm={1} md={3} lg={4}/>
                     <Grid item xs={12} sm={5} md={3} lg={2} style={{textAlign: 'center'}}>
                         <TextField
-                            id={'sign-up-fname-input'} label={"First Name"} variant={'filled'} fullWidth={true} onChange={this.handleFName}/>
+                            id={'sign-up-fname-input'} helperText={this.state.fNameError} label={"First Name"} variant={'filled'} fullWidth={true} onChange={this.handleFName}/>
                     </Grid>
 
                     <Grid item xs={12} sm={5} md={3} lg={2} style={{textAlign: 'center'}}>
                         <TextField
-                            id={'sign-up-lname-input'} label={"Last Name"} variant={'filled'} fullWidth={true} onChange={this.handleLName}/>
+                            id={'sign-up-lname-input'} helperText={this.state.lNameError} label={"Last Name"} variant={'filled'} fullWidth={true} onChange={this.handleLName}/>
                     </Grid>
                     <Grid item xs={false} sm={1} md={3} lg={4}/>
 
@@ -191,12 +309,12 @@ class Signup extends Component{
                     <Grid item xs={false} sm={1} md={3} lg={4}/>
                     <Grid item xs={12} sm={5} md={3} lg={2} style={{textAlign: 'center'}}>
                         <TextField
-                            id={'sign-up-username-input'} label={"Username"} variant={'filled'} onChange={this.handleUsername} fullWidth={true}/>
+                            id={'sign-up-username-input'} helperText={this.state.usernameError} label={"Username"} variant={'filled'} onChange={this.handleUsername} fullWidth={true}/>
                     </Grid>
 
                     <Grid item xs={12} sm={5} md={3} lg={2} style={{textAlign: 'center'}}>
                         <TextField
-                            id={'sign-up-email-input'} label={"Email Address"} variant={'filled'} onChange={this.handleEmail} fullWidth={true}/>
+                            id={'sign-up-email-input'} helperText={this.state.emailError} label={"Email Address"} variant={'filled'} onChange={this.handleEmail} fullWidth={true}/>
                     </Grid>
                     <Grid item xs={false} sm={1} md={3} lg={4}/>
 
@@ -204,12 +322,12 @@ class Signup extends Component{
                     <Grid item xs={false} sm={1} md={3} lg={4}/>
                     <Grid item xs={12} sm={5} md={3} lg={2} style={{textAlign: 'center'}}>
                         <TextField
-                            id={'sign-up-password-input'} label={"Password"} type={'password'} variant={'filled'} onChange={this.handlePassword} fullWidth={true}/>
+                            id={'sign-up-password-input'} helperText={this.state.passwordError} label={"Password"} type={'password'} variant={'filled'} onChange={this.handlePassword} fullWidth={true}/>
                     </Grid>
 
                     <Grid item xs={12} sm={5} md={3} lg={2} style={{textAlign: 'center'}}>
                         <TextField
-                            id={'sign-up-confirm-password-input'} helperText={this.state.errorText} label={"Confirm Password"} type={'password'} variant={'filled'} onChange={this.handleConfirmPassword} fullWidth={true}/>
+                            id={'sign-up-confirm-password-input'} helperText={this.state.passwordError} label={"Confirm Password"} type={'password'} variant={'filled'} onChange={this.handleConfirmPassword} fullWidth={true}/>
                     </Grid>
                     <Grid item xs={false} sm={1} md={3} lg={4}/>
 
@@ -224,7 +342,7 @@ class Signup extends Component{
                     {/*Utility grid config*/}
                     <Grid item xs={1} sm={1} md={3} lg={4} xl={5}/>
                     <Grid item xs={5} sm={5} md={3} lg={2} xl={1} style={{textAlign: 'center'}}>
-                        <Button style={{fontSize: 12}} onClick={this.showDialog}>Recover Lost Account</Button>
+                        <Button style={{fontSize: 12}} onClick={this.handleForgotten}>Forgot Password?</Button>
                     </Grid>
 
                     <Grid item xs={5} sm={5} md={3} lg={2} xl={1} style={{textAlign: 'center'}}>
@@ -239,6 +357,7 @@ class Signup extends Component{
                 </Grid>
 
                 {this.showConfirmDialog()}
+                {this.showErrorDialog()}
             </Box>
         )
     }

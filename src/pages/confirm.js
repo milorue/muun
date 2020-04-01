@@ -5,10 +5,7 @@ import {Stitch, UserPasswordCredential, UserPasswordAuthProviderClient} from 'mo
 
 import {Typography, Button, Grid, Box, Link} from "@material-ui/core";
 
-const url = window.location.search;
-const params = new URLSearchParams(url);
-const token = params.get('token');
-const tokenId = params.get('tokenId');
+
 
 import logo_md from '../assets/logo_med.png'
 
@@ -22,15 +19,48 @@ class Confirm extends Component{
     }
 
     componentDidMount() {
-        this.confirmUser();
+        const url = this.props.location.search;
+        const params = new URLSearchParams(url);
+        const token = params.get('token');
+        const tokenId = params.get('tokenId');
+        this.confirmUser(token, tokenId).then(()=>{
+            this.setState({accountConfirmed: true})
+        }).catch(err =>{
+            this.setState({accountConfirmed: false})
+            console.error(err)
+        })
     }
 
-    confirmUser(){
+    confirmUser(token, tokenId){
         Stitch.getAppClient('muun-hizde');
 
         const emailPassClient = Stitch.defaultAppClient.auth.getProviderClient(UserPasswordAuthProviderClient.factory);
 
+        console.log(token);
+        console.log(tokenId);
+
         return emailPassClient.confirmUser(token, tokenId)
+    }
+
+    handleLogin = () =>{
+        this.props.history.push('/')
+    };
+
+    accountText(){
+        if(this.state.accountConfirmed){
+            return(
+                <Typography variant={'body2'} align={'center'} style={{backgroundColor: 'lightgrey', borderRadius: 5, padding: 20}}>
+                    Your account has been confirmed
+                </Typography>
+            )
+        }
+        else{
+            return(
+                <Typography variant={'body2'} align={'center'} style={{backgroundColor: 'lightgrey', borderRadius: 5, padding: 20}}>
+                    There was an error in confirming your account
+                </Typography>
+            )
+        }
     }
 
     render() {
@@ -46,12 +76,16 @@ class Confirm extends Component{
                     <Grid item xs={1} md={4}/>
 
                     <Grid item xs={10} md={4}>
-                        <Typography variant={'body2'} align={'center'} style={{backgroundColor: 'lightgrey', borderRadius: 5, padding: 20}}>
-                            Your account has been confirmed
-                        </Typography>
+                        {this.accountText()}
                     </Grid>
 
                     <Grid item xs={1} md={4}/>
+
+                    <Grid item xs={3} md={5}/>
+                    <Grid item xs={6} md={2}>
+                        <Button style={{backgroundColor: '#667999'}} color={'primary'} onClick={this.handleLogin} variant={'contained'} fullWidth={true}>Return to Login</Button>
+                    </Grid>
+                    <Grid item xs={3} md={5}/>
 
                 </Grid>
 

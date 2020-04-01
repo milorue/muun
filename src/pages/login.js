@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './login.css';
-import {Stitch, AnonymousCredential, RemoteMongoClient, UserPasswordCredential} from 'mongodb-stitch-browser-sdk'
+import {Stitch, AnonymousCredential, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk'
 
 import {Button, Grid, Box, Typography, TextField, Link, DialogTitle} from '@material-ui/core'
 
@@ -86,7 +86,7 @@ class Login extends Component{
         client.auth.loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
             .then((user)=>{
             console.log('Login success for: ' + user.profile.email)
-                this.props.history.push('/muun/dog') // going to change to home
+                this.props.history.push('/dog') // going to change to home
         })
             .catch(err =>{
                 console.log('Login failure at ' + err)
@@ -95,7 +95,11 @@ class Login extends Component{
     };
 
     handleCreateAccount = () =>{
-        this.props.history.push('/muun/signup')
+        this.props.history.push('/signup')
+    };
+
+    handleForgotten = () =>{
+        this.props.history.push('/forgot')
     }
 
     render() {
@@ -138,7 +142,7 @@ class Login extends Component{
                     {/*Utility grid config*/}
                     <Grid item xs={1} sm={1} md={3} lg={4} xl={5}/>
                     <Grid item xs={5} sm={5} md={3} lg={2} xl={1} style={{textAlign: 'center'}}>
-                        <Button style={{fontSize: 12}}>Forgot Password?</Button>
+                        <Button style={{fontSize: 12}} onClick={this.handleForgotten}>Forgot Password?</Button>
                     </Grid>
 
                     <Grid item xs={5} sm={5} md={3} lg={2} xl={1} style={{textAlign: 'center'}}>
