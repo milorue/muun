@@ -43,15 +43,15 @@ class Confirm extends Component{
                         <img src={logo_md} alt={'logo'}/>
                     </Grid>
 
-                    <Grid item md={3}/>
+                    <Grid item xs={1} md={4}/>
 
-                    <Grid item md={6}>
-                        <Typography variant={'body2'} align={'center'}>
+                    <Grid item xs={10} md={4}>
+                        <Typography variant={'body2'} align={'center'} style={{backgroundColor: 'lightgrey', borderRadius: 5, padding: 20}}>
                             Your account has been confirmed
                         </Typography>
                     </Grid>
 
-                    <Grid item md={3}/>
+                    <Grid item xs={1} md={4}/>
 
                 </Grid>
 
