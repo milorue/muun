@@ -86,6 +86,7 @@ class Signup extends Component{
 
     };
 
+
     confirmCredentials() {
 
         this.validateUsername(this.state.username)
@@ -96,9 +97,8 @@ class Signup extends Component{
 
         if (this.validateEmail(this.state.email) &&
             this.validatePassword(this.state.password, this.state.cpassword) &&
-            this.validateUsername(this.state.username) &&
-            this.validateFName(this.state.fname) &&
-            this.validateLName(this.state.lname)) {
+            this.validateUsername(this.state.username) && this.validateLName(this.state.lname) &&
+            this.validateFName(this.state.fname)) {
 
 
 
@@ -163,7 +163,7 @@ class Signup extends Component{
 
     validateEmail(address){
         var re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-        if(!re.test(String(address).toLowerCase())){
+        if(re.test(String(address).toLowerCase())){
             this.setState({
                 emailError: 'Invalid email address'
             })
@@ -256,10 +256,12 @@ class Signup extends Component{
             client.registerWithEmail(this.state.email, this.state.password)
                 .then(() =>{
                     console.log('account success for: ' + this.state.email)
+                    this.handleUserData()
                     this.setState({confirmDialog: true}) // sets confirmation dialog visible
                 })
                 .catch(err =>{
                     console.error('account error: ' + err)
+                    this.setState({errorDialog: true})
                 })
         }
         else{
@@ -267,6 +269,36 @@ class Signup extends Component{
         }
 
     };
+
+    handleUserData(){
+
+        const app = Stitch.defaultAppClient
+        app.auth.loginWithCredential(new UserPasswordCredential('signin', 'muunservicesignup')) // needs to be hidden in production
+            .then(() =>{
+                const client = Stitch.defaultAppClient
+                const mongoClient = client.getServiceClient(RemoteMongoClient.factory,
+                    'muun-service')
+
+                const db = mongoClient.db('muun')
+                const users = db.collection('userdata')
+                users.insertOne({
+                    email: this.state.email,
+                    fname: this.state.fname,
+                    lname: this.state.lname,
+                    username: this.state.username,
+                    accountCreated: new Date(),
+                })
+                    .then(()=>{
+                        app.auth.logout();
+                    })
+                    .catch(err =>{
+                        console.error(err)
+                    })
+            })
+
+
+
+    }
 
     handleForgotten = () =>{
         this.props.history.push('/forgot')

@@ -5,11 +5,12 @@
   "homepage": "https://milorue.github.io/muun/",
   "dependencies": {
     "@material-ui/core": "latest",
+    "@material-ui/icons": "^4.9.1",
+    "mongodb-stitch-browser-sdk": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-router-dom": "^5.1.2",
-    "react-scripts": "0.9.5",
-    "mongodb-stitch-browser-sdk": "latest"
+    "react-scripts": "0.9.5"
   },
   "devDependencies": {
     "gh-pages": "^2.2.0"

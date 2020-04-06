@@ -86,7 +86,7 @@ class Login extends Component{
         client.auth.loginWithCredential(new UserPasswordCredential(this.state.username, this.state.password))
             .then((user)=>{
             console.log('Login success for: ' + user.profile.email)
-                this.props.history.push('/dog') // going to change to home
+                this.props.history.push('/home') // going to change to home
         })
             .catch(err =>{
                 console.log('Login failure at ' + err)

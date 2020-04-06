@@ -40,6 +40,7 @@ class Reset extends Component{
         if(this.state.password.length >= 6 && this.state.password === this.state.cpassword){  // checks for password need to be passed to dialog at some point
             return emailPassClient.resetPassword(token, tokenId, this.state.password).then(() => {
                 console.log("Successfully reset password!");
+                this.props.history.push('/')
             }).catch(err => {
                 console.log("Error resetting password:", err);
             });
