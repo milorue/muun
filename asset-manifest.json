@@ -1,9 +1,11 @@
 {
-  "main.css": "static/css/main.ea9dc701.css",
-  "main.css.map": "static/css/main.ea9dc701.css.map",
-  "main.js": "static/js/main.911c7995.js",
-  "main.js.map": "static/js/main.911c7995.js.map",
+  "main.css": "static/css/main.ce2197c8.css",
+  "main.css.map": "static/css/main.ce2197c8.css.map",
+  "main.js": "static/js/main.c27b3b5b.js",
+  "main.js.map": "static/js/main.c27b3b5b.js.map",
   "static/media/banner.png": "static/media/banner.c0c870fe.png",
+  "static/media/groups.png": "static/media/groups.e04defda.png",
   "static/media/logo_big.png": "static/media/logo_big.e6e1eab7.png",
-  "static/media/logo_med.png": "static/media/logo_med.f87408bd.png"
+  "static/media/logo_med.png": "static/media/logo_med.f87408bd.png",
+  "static/media/munTeam.png": "static/media/munTeam.ba4c5905.png"
 }
