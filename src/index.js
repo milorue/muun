@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import {Route, Link, BrowserRouter, HashRouter, Switch} from 'react-router-dom'
+import {Route, Link, BrowserRouter, HashRouter,} from 'react-router-dom'
 
 import Login from "./pages/login";
 import Signup from "./pages/signup";
@@ -24,23 +24,11 @@ import Toolbar from '@material-ui/core/Toolbar';
 
 
 Stitch.initializeDefaultAppClient('muun-hizde');
-console.log('Hit initialize')
 
 const routes = (
         <HashRouter basename={'/'}>
         <div>
-            <AppBar position={'relative'} style={{backgroundColor: '#667999'}}>
-                <Toolbar>
 
-                    <Typography variant="h6">
-                        <Link style={{color: 'white', textDecoration: 'none', marginRight: 8}} to="/"><img src={logo} style={{marginTop: 10}}/></Link>
-                    </Typography>
-
-                    <Typography variant="h6">
-                        <Link style={{color: 'white', textDecoration: 'none',}} to="/">Muun</Link>
-                    </Typography>
-                </Toolbar>
-            </AppBar>
 
             <Route exact path="/" component={Login} />
             <Route path={'/signup'} component={Signup}/>

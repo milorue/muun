@@ -6,6 +6,8 @@
   "dependencies": {
     "@material-ui/core": "latest",
     "@material-ui/icons": "^4.9.1",
+    "@material-ui/lab": "^4.0.0-alpha.48",
+    "draft-js": "^0.11.5",
     "mongodb-stitch-browser-sdk": "latest",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",

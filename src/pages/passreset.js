@@ -2,11 +2,15 @@ import React, {Component} from 'react';
 
 import {Stitch, AnonymousCredentials, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk'
 
-import {Button, Grid, Box, Typography, TextField, Link, DialogTitle} from "@material-ui/core";
+import {Link} from 'react-router-dom'
 
+import {Button, Grid, Box, Typography, TextField, DialogTitle, Toolbar} from "@material-ui/core";
+
+import logoSmall from '../assets/app_bar_variant.png'
 import logo from '../assets/app_logo.png'
 import logo_md from '../assets/logo_med.png'
 import {Dialog} from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
 
 class PasswordReset extends Component{
 
@@ -75,6 +79,22 @@ class PasswordReset extends Component{
 
     render(){
         return(
+
+            <div>
+
+                <AppBar position={"sticky"} style={{backgroundColor: '#667999'}}>
+                    <Toolbar>
+
+                        <Typography variant="h6">
+                            <Link style={{color: 'white', textDecoration: 'none', marginRight: 8}} to="/"><img src={logoSmall} style={{marginTop: 10}}/></Link>
+                        </Typography>
+
+                        <Typography variant="h6">
+                            <Link style={{color: 'white', textDecoration: 'none',}} to="/">Muun</Link>
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+
             <Box style={{alignItems: 'stretch'}} className={'app'}>
                 <Grid container spacing={3} style={{flexGrow: 1,}} alignContent={'stretch'}>
 
@@ -99,6 +119,7 @@ class PasswordReset extends Component{
 
                 {this.showSentDialog()}
             </Box>
+            </div>
         )
     }
 }

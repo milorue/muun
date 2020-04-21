@@ -2,12 +2,18 @@ import React, {Component} from 'react';
 import './signup.css';
 import {Stitch, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk'
 
-import {Button, Grid, Box, Typography, TextField, Link, DialogTitle} from "@material-ui/core";
+import {Button, Grid, Box, Typography, TextField, DialogTitle, Toolbar} from "@material-ui/core";
 
 import Dialog from "@material-ui/core/Dialog";
 
+import {Link} from 'react-router-dom'
+
+import {Link as HyperLink} from '@material-ui/core'
+
+import logoSmall from '../assets/app_bar_variant.png'
 import logo from '../assets/app_logo.png'
 import logo_md from '../assets/logo_med.png'
+import AppBar from "@material-ui/core/AppBar";
 
 class Signup extends Component{
 
@@ -72,9 +78,9 @@ class Signup extends Component{
         return(
             <Typography variant={"body2"} color={'textSecondary'} align={'center'}>
                 {'Copyright © '}
-                <Link color={"inherit"} href={'https://milo-rue.com'}>
+                <HyperLink color={"inherit"} href={'https://milo-rue.com'}>
                     Milo Rue
-                </Link> {' '}
+                </HyperLink> {' '}
                 {new Date().getFullYear()}
                 {'.'}
             </Typography>
@@ -312,6 +318,21 @@ class Signup extends Component{
 
     render(){
         return(
+            <div>
+
+                <AppBar position={"sticky"} style={{backgroundColor: '#667999'}}>
+                    <Toolbar>
+
+                        <Typography variant="h6">
+                            <Link style={{color: 'white', textDecoration: 'none', marginRight: 8}} to="/"><img src={logoSmall} style={{marginTop: 10}}/></Link>
+                        </Typography>
+
+                        <Typography variant="h6">
+                            <Link style={{color: 'white', textDecoration: 'none',}} to="/">Muun</Link>
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
+
             <Box style={{alignItems: 'stretch'}} className={'container'}>
 
                 <Grid container spacing={2} style={{flexGrow: 1}} alignContent={'stretch'}>
@@ -391,6 +412,7 @@ class Signup extends Component{
                 {this.showConfirmDialog()}
                 {this.showErrorDialog()}
             </Box>
+            </div>
         )
     }
 

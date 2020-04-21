@@ -2,12 +2,18 @@ import React, { Component } from 'react';
 import './login.css';
 import {Stitch, AnonymousCredential, RemoteMongoClient, UserPasswordCredential, UserPasswordAuthProviderClient} from 'mongodb-stitch-browser-sdk'
 
-import {Button, Grid, Box, Typography, TextField, Link, DialogTitle} from '@material-ui/core'
+import {Button, Grid, Box, Typography, TextField, DialogTitle, Toolbar} from '@material-ui/core'
 
+import {Link} from 'react-router-dom'
+
+import {Link as HyperLink} from '@material-ui/core'
+
+import logoSmall from '../assets/app_bar_variant.png'
 import logo from '../assets/app_logo.png'
 import logo_big from '../assets/logo_big.png'
 import logo_md from '../assets/logo_med.png'
 import {Dialog} from "@material-ui/core";
+import AppBar from "@material-ui/core/AppBar";
 
 class Login extends Component{
 
@@ -46,9 +52,9 @@ class Login extends Component{
         return(
             <Typography variant={"body2"} color={'textSecondary'} align={'center'}>
                 {'Copyright © '}
-                <Link color={"inherit"} href={'https://milo-rue.com'}>
+                <HyperLink color={"inherit"} href={'https://milo-rue.com'}>
                     Milo Rue
-                </Link> {' '}
+                </HyperLink> {' '}
                 {new Date().getFullYear()}
                 {'.'}
             </Typography>
@@ -104,6 +110,20 @@ class Login extends Component{
 
     render() {
         return (
+
+            <div>
+                <AppBar position={"sticky"} style={{backgroundColor: '#667999'}}>
+                    <Toolbar>
+
+                        <Typography variant="h6">
+                            <Link style={{color: 'white', textDecoration: 'none', marginRight: 8}} to="/"><img src={logoSmall} style={{marginTop: 10}}/></Link>
+                        </Typography>
+
+                        <Typography variant="h6">
+                            <Link style={{color: 'white', textDecoration: 'none',}} to="/">Muun</Link>
+                        </Typography>
+                    </Toolbar>
+                </AppBar>
             <Box style={{alignItems: 'stretch'}} className={'app'}>
 
                 <Grid container spacing={3} style={{flexGrow: 1,}} alignContent={'stretch'}>
@@ -159,6 +179,7 @@ class Login extends Component{
 
                 {this.showLoginDialog()}
             </Box>
+            </div>
         );
     }
 }

@@ -1,4 +1,19 @@
 .container {
-    overflow: hidden;
-    height: auto;
+    overflow-x: hidden;
+    height: calc(100% - 64px)
+}
+
+.note-dialog{
+    padding: 20px;
+}
+
+.column{
+    flex-grow: 1;
+    overflow: auto;
+    min-height: 100%;
+}
+
+.bannerGroup{
+    position: static;
+    overflow-x: hidden;
 }
