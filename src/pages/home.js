@@ -26,7 +26,8 @@ import {
     DialogActions,
     InputAdornment,
     CardActions,
-    DialogContent
+    DialogContent,
+    CardMedia
 } from "@material-ui/core";
 
 import SaveAltIcon from '@material-ui/icons/SaveAlt';
@@ -35,6 +36,7 @@ import AddIcon from '@material-ui/icons/Add';
 import SearchIcon from '@material-ui/icons/Search';
 import PersonIcon from '@material-ui/icons/Person';
 import PersonAddIcon from '@material-ui/icons/PersonAdd';
+import GroupIcon from '@material-ui/icons/Group';
 
 
 import logo from '../assets/app_bar_variant.png'
@@ -47,7 +49,7 @@ import setting_icon from '../assets/setting_icon.png'
 import logout_icon from '../assets/logout_icon.png'
 import notepad from '../assets/notepad.png'
 import document_icon from '../assets/document_icon.png'
-import group_banner from '../assets/groups.png'
+import group_banner from '../assets/groups_530x200.png'
 import mun from '../assets/munTeam.png'
 
 
@@ -709,17 +711,17 @@ class Home extends Component{
             <Grid container>
 
             <Grid item xs={12}>
-                <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+                <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934', color: 'white'}}>
                     <CardContent style={{flexDirection: 'row'}}>
                         <Grid container spacing={1}>
                             <Grid item xs={11} md={3}>
-                                <Typography variant={'body2'} color={"textSecondary"}>
+                                <Typography variant={'body2'} color={"textSecondary"} style={{color: 'white'}}>
                                     Overview
                                 </Typography>
-                                <Typography variant={'h4'} color={"textPrimary"} gutterBottom>
+                                <Typography variant={'h4'} color={"textPrimary"} gutterBottom style={{color: 'white'}}>
                                     {"Welcome, " + this.state.userData.fname}
                                 </Typography>
-                                <Typography variant={"body2"} color={"textPrimary"}>
+                                <Typography variant={"body2"} color={"textPrimary"} style={{color: 'white'}}>
                                     Here's an overview of your account
                                 </Typography>
                                 <Button variant={"contained"} style={{marginTop: 10}}>
@@ -727,7 +729,7 @@ class Home extends Component{
                                 </Button>
                             </Grid>
                             <Grid item xs={1} md={9} style={{textAlign: 'center'}}>
-                                <img src={banner} style={{margin: 5}}/>
+                                
                             </Grid>
                         </Grid>
 
@@ -738,25 +740,12 @@ class Home extends Component{
                 <Grid item xs={12} md={8}>
 
                     <Grid item xs={12}>
-                        <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934'}}>
                             <CardContent>
-                                <Typography variant={"h6"} color={"textPrimary"} gutterBottom>
-                                    Groups
-                                </Typography>
-                                <Typography variant={"body2"} color={"textPrimary"}>
-                                    No groups currently
-                                </Typography>
-                            </CardContent>
-                        </Card>
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
-                            <CardContent>
-                                <Typography variant={"h6"} color={"textPrimary"} gutterBottom>
+                                <Typography variant={"h6"} color={"textPrimary"} gutterBottom style={{color: 'white'}}>
                                     Alerts
                                 </Typography>
-                                <Typography variant={"body2"} color={"textPrimary"}>
+                                <Typography variant={"body2"} color={"textPrimary"} style={{color: 'white'}}>
                                     No new alerts
                                 </Typography>
                             </CardContent>
@@ -764,27 +753,40 @@ class Home extends Component{
                     </Grid>
 
                     <Grid item xs={12}>
-                        <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934' }}>
                             <CardContent>
-                                <Typography variant={"h6"} color={"textPrimary"} gutterBottom>
+                                <Typography variant={"h6"} color={"textPrimary"} gutterBottom style={{color: 'white'}}>
+                                    Groups
+                                </Typography>
+                                <List>
+                                {this.renderOverviewGroups()}
+                                </List>
+                            </CardContent>
+                        </Card>
+                    </Grid>
+
+                    <Grid item xs={12}>
+                        <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934'}}>
+                            <CardContent>
+                                <Typography variant={"h6"} color={"textPrimary"} gutterBottom style={{color: 'white'}}>
                                     Documents
                                 </Typography>
                                 <List>
-                                    <ListItem button key={'change'} style={{backgroundColor: 'whitesmoke', marginTop: 5}}>
+                                    <ListItem button key={'change'} style={{backgroundColor: '#374152', marginTop: 5}}>
                                         <ListItemAvatar>
                                             <Avatar alt={'Milo Rue'} style={{backgroundColor: '#799966'}}>MR</Avatar>
                                         </ListItemAvatar>
                                         <ListItemText secondary={"02-06-2020"} primary={'Directive Bane Effect 2.0'}/>
                                     </ListItem>
 
-                                    <ListItem button key={'changes'} style={{backgroundColor: 'whitesmoke', marginTop: 5}}>
+                                    <ListItem button key={'changes'} style={{backgroundColor: '#374152', marginTop: 5}}>
                                         <ListItemAvatar>
                                             <Avatar alt={'Milo Rue'} style={{backgroundColor: '#799966'}}>MR</Avatar>
                                         </ListItemAvatar>
                                         <ListItemText secondary={"02-06-2020"} primary={'Directive Bane Effect 2.0'}/>
                                     </ListItem>
 
-                                    <ListItem button key={'changez'} style={{backgroundColor: 'whitesmoke', marginTop: 5}}>
+                                    <ListItem button key={'changez'} style={{backgroundColor: '#374152', marginTop: 5}}>
                                         <ListItemAvatar>
                                             <Avatar alt={'Milo Rue'} style={{backgroundColor: '#799966'}}>MR</Avatar>
                                         </ListItemAvatar>
@@ -799,31 +801,31 @@ class Home extends Component{
 
                 </Grid>
                 <Grid item xs={12} md={4}>
-                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934'}}>
                         <CardContent>
-                            <Typography variant={"h6"} color={"textPrimary"} gutterBottom>
+                            <Typography variant={"h6"} color={"textPrimary"} gutterBottom style={{color: 'white'}}>
                                 Messages
                             </Typography>
                             <List>
-                                <ListItem button key={'change'} style={{backgroundColor: 'whitesmoke', marginTop: 5}}>
+                                <ListItem button key={'change'} style={{backgroundColor: '#374152', marginTop: 5, color: 'white'}}>
                                     <ListItemAvatar>
-                                        <Avatar alt={'Milo Rue'} style={{backgroundColor: '#799966'}}>MR</Avatar>
+                                        <Avatar alt={'Milo Rue'} style={{backgroundColor: '#6F5FA0'}}>MR</Avatar>
                                     </ListItemAvatar>
                                     <ListItemText secondary={"02-06-2020"} primary={'Directive Bane Effect 2.0'}/>
                                 </ListItem>
 
-                                <ListItem button key={'changes'} style={{backgroundColor: 'whitesmoke', marginTop: 5}}>
+                                <ListItem button key={'changes'} style={{backgroundColor: '#374152', marginTop: 5, color: 'white'}}>
                                     <ListItemAvatar>
-                                        <Avatar alt={'Milo Rue'} style={{backgroundColor: '#799966'}}>MR</Avatar>
+                                        <Avatar alt={'Milo Rue'} style={{backgroundColor: '#6F5FA0'}}>MR</Avatar>
                                     </ListItemAvatar>
                                     <ListItemText secondary={"02-06-2020"} primary={'Directive Bane Effect 2.0'}/>
                                 </ListItem>
 
-                                <ListItem button key={'changez'} style={{backgroundColor: 'whitesmoke', marginTop: 5}}>
+                                <ListItem button key={'changez'} style={{backgroundColor: '#374152', marginTop: 5, color: 'white'}}>
                                     <ListItemAvatar>
-                                        <Avatar alt={'Milo Rue'} style={{backgroundColor: '#799966'}}>MR</Avatar>
+                                        <Avatar alt={'Milo Rue'} style={{backgroundColor: '#6F5FA0'}}>MR</Avatar>
                                     </ListItemAvatar>
-                                    <ListItemText secondary={"02-06-2020"} primary={'Directive Bane Effect 2.0'}/>
+                                    <ListItemText secondary={"02-06-2020"} primary={'Directive Bane Effect 2.0'} />
                                 </ListItem>
                             </List>
                         </CardContent>
@@ -833,15 +835,34 @@ class Home extends Component{
         )
     }
 
+    renderOverviewGroups(){
+        if(this.state.groups !== undefined){
+            return(this.state.groups.map((groupInfo) =>{
+                return(
+                        <ListItem button key={groupInfo._id} style={{backgroundColor: '#374152', color: 'white', marginTop: 10, borderRadius: 2}}>
+                            <ListItemIcon><GroupIcon/></ListItemIcon>
+                            <ListItemText secondary={groupInfo.description} primary={groupInfo.name} style={{color: 'white'}}/>
+                            
+                        </ListItem>
+                )
+            }))
+        }
+        else{
+            return(
+                <Typography variant={"body2"} color={"textPrimary"} style={{color: 'white'}}>
+                                    No groups currently
+                                </Typography>
+            )
+        }
+    }
+
     renderGroupTab(){
         return(
             <Grid container>
                 <Grid item xs={12}>
-                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934', color: 'white'}}>
                         <CardContent>
                             <Grid container spacing={1}>
-
-                                <Typography variant={"body2"} color={"textSecondary"}>Groups</Typography>
 
                                 <Grid container item xs={12}>
 
@@ -859,21 +880,15 @@ class Home extends Component{
                                 </Grid>
 
                                 <Grid container item xs={12} md={4} justify={'flex-start'}>
-                                    <TextField fullWidth={true} id={'note-search-field'} variant={"filled"} label={'Search'} margin={"dense"}
-                                               InputProps={{
-                                                   startAdornment: (
-                                                       <InputAdornment position={"start"}>
-                                                           <SearchIcon style={{color: 'grey'}}/>
-                                                       </InputAdornment>
-                                                   )
-                                               }}/>
+                                    <TextField fullWidth={true} id={'note-search-field'} variant={"filled"} label={'Search'} margin={"dense"} style={{backgroundColor: 'white', borderRadius: 5}}
+                                               />
                                 </Grid>
 
                             </Grid>
                         </CardContent>
                     </Card>
 
-                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5, backgroundColor: '#667999'}}>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5, backgroundColor: '#232934', color: 'white'}}>
                         <CardContent>
                             <Typography variant={"body"} style={{color: 'white', fontWeight: 'bold'}}>My Groups</Typography>
                         </CardContent>
@@ -882,6 +897,38 @@ class Home extends Component{
                     <Grid container>
                         {this.renderGroups()}
                     </Grid>
+
+                    <Grid container spacing={1}>
+
+                    <Grid item xs={12} md={6}>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5, backgroundColor: '#232934', color: 'white'}}>
+                        <CardContent>
+                            <Typography variant={'body'} style={{color: 'white', fontWeight: 'bold'}}>Invites</Typography>
+                        </CardContent>
+                    </Card>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5, backgroundColor: '#232934', color: 'white'}}> 
+                        <CardContent>
+                            <List>
+                                <ListItem button>
+                                    <ListItemText>Test Invite</ListItemText>
+                                </ListItem>
+                            </List>
+                        </CardContent>
+                    </Card>
+                    </Grid>
+
+                    <Grid item xs={12} md={6}>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, marginBottom: 5, backgroundColor: '#232934', color: 'white'}}>
+                        <CardContent>
+                            <Typography variant={'body'} style={{color: 'white', fontWeight: 'bold'}}>Friends</Typography>
+                        </CardContent>
+                    </Card>
+                    </Grid>
+
+                    </Grid>
+
+                    
+                    
 
                 </Grid>
 
@@ -896,15 +943,18 @@ class Home extends Component{
             return(this.state.groups.map((groupInfo) =>{
                 return(
                     <Grid item xs={12} md={6} lg={4} key={groupInfo._id}>
-                        <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+                        <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934', color: 'white'}}>
+                            <CardMedia>
+                            <div style={{textAlign: 'center'}}>
+                                <img src={group_banner} style={{width: 530, height: 200, alignContent: 'center', alignText: 'center',}}/>
+                            </div>
+                            </CardMedia>
                             <CardContent>
                                 <Typography variant={"body"} style={{marginBottom: 20}}>{groupInfo.name}</Typography>
                                 <Divider style={{marginTop: 10, marginBottom: 10}}/>
-                                <Typography variant={"body2"} color={"textSecondary"} style={{height: 50}}>{groupInfo.description}</Typography>
+                                <Typography variant={"body2"} color={"textSecondary"} style={{height: 50, color: 'white'}}>{groupInfo.description}</Typography>
                             </CardContent>
-                            {/*<div style={{textAlign: 'center'}}>*/}
-                            {/*    <img src={group_banner} style={{alignContent: 'center', alignText: 'center', borderBottomLeftRadius: 5, borderBottomRightRadius: 5}}/>*/}
-                            {/*</div>*/}
+                            
 
                                 <Divider/>
                                 <CardActions>
@@ -928,9 +978,8 @@ class Home extends Component{
 
 
                 <Grid item xs={12}>
-                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20,}}>
+                    <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934', color: 'white'}}>
                         <CardContent>
-                            <Typography variant={"body2"} color={"textSecondary"}>Notepad</Typography>
                             <Grid container alignItems={"center"} >
                                 <Grid container item xs={12} lg={8}>
                                     <Typography variant={"h5"} style={{marginTop: 5}}>
@@ -940,19 +989,13 @@ class Home extends Component{
                                 <Grid container item lg={4} xs={12} justify={"flex-end"} >
 
                                     <Tooltip title={'New Note'}>
-                                        <Button variant={"contained"} style={{backgroundColor: '#799966', marginLeft: 10, marginTop: 10, height: 40}} color={"secondary"} onClick={this.handleNewNote}>New Note</Button>
+                                        <Button variant={"contained"} style={{backgroundColor: '#52ad72', marginLeft: 10, marginTop: 10, height: 40}} color={"secondary"} onClick={this.handleNewNote}>New Note</Button>
                                     </Tooltip>
                                 </Grid>
 
                                 <Grid container item xs={12} md={4} justify={'flex-start'}>
-                                <TextField fullWidth={true} id={'note-search-field'} variant={"filled"} label={'Search'} margin={"dense"} style={{marginTop: 20}}
-                                           InputProps={{
-                                               startAdornment: (
-                                                   <InputAdornment position={"start"}>
-                                                       <SearchIcon style={{color: 'grey'}}/>
-                                                   </InputAdornment>
-                                               )
-                                           }}/>
+                                <TextField fullWidth={true} id={'note-search-field'} variant={"filled"} label={'Search'} margin={"dense"} style={{marginTop: 20, backgroundColor: 'white', borderRadius: 5}}
+                                           />
                                 </Grid>
                             </Grid>
                         </CardContent>
@@ -975,11 +1018,11 @@ class Home extends Component{
             return(this.state.notes.map((noteInfo, index) => {
                 return(
                     <Grid item xs={12} key={noteInfo._id}>
-                        <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20}}>
+                        <Card style={{marginLeft: 20, marginRight: 20, marginTop: 20, backgroundColor: '#232934', color: 'white'}}>
                             <CardContent>
                                 <Grid container>
                                     <Grid item xs={4}>
-                                        <Typography variant={'body2'} color={"textSecondary"}>
+                                        <Typography variant={'body2'} color={"textSecondary"} style={{color: 'white'}}>
                                             {"Note: " + this.toInt(index)}
                                         </Typography>
                                     </Grid>
@@ -989,13 +1032,13 @@ class Home extends Component{
                                             <Button variant={"contained"} style={{backgroundColor: '#AF5054', marginLeft: 5}} color={"secondary"} onClick={() => this.handleStartDeleteNote(noteInfo._id)}><DeleteOutlineIcon/></Button>
                                         </Tooltip>
                                         <Tooltip title={'Save Note'}>
-                                            <Button variant={"contained"} style={{backgroundColor: '#667999', marginLeft: 5}} color={"secondary"} onClick={this.handleSaveNotes}><SaveAltIcon/></Button>
+                                            <Button variant={"contained"} style={{backgroundColor: '#525FAD', marginLeft: 5}} color={"secondary"} onClick={this.handleSaveNotes}><SaveAltIcon/></Button>
                                         </Tooltip>
 
                                     </Grid>
                                 </Grid>
 
-                                <TextField id={'active-note-name'} label={'Name'} variant={"standard"} defaultValue={noteInfo.noteName} style={{marginTop: 10, marginBottom: 10}} onChange={() => this.handleMappedNotesName(event, index)}/>
+                                <TextField id={'active-note-name'} variant={"filled"} defaultValue={noteInfo.noteName} style={{marginTop: 10, marginBottom: 10, backgroundColor: 'white', borderRadius: 2}} onChange={() => this.handleMappedNotesName(event, index)}/>
                                 <Grid item xs={12}>
                                     <Grid item xs={12} style={{backgroundColor: 'whitesmoke', height: "inherit", padding: 10,}}>
                                         <TextField multiline fullWidth={true} variant={'filled'} className={'editor'} defaultValue={noteInfo.noteContent} rows={27} onChange={() => this.handleMappedNotesContent(event, index)}/>
@@ -1017,23 +1060,32 @@ class Home extends Component{
             <AppBar position={"fixed"} style={{backgroundColor: '#667999'}}>
                 <Toolbar>
 
-                    <Typography variant="h6">
-                        <Link style={{color: 'white', textDecoration: 'none', marginRight: 8}} to="/home"><img src={logo} style={{marginTop: 10}}/></Link>
-                    </Typography>
+                    <Grid container item alignItems={'center'}>
+                        <Typography variant="h6">
+                            <Link style={{color: 'white', textDecoration: 'none', marginRight: 8}} to="/home"><img src={logo} style={{marginTop: 10}}/></Link>
+                        </Typography>
 
-                    <Typography variant="h6">
-                        <Link style={{color: 'white', textDecoration: 'none',}} to="/home">Muun</Link>
-                    </Typography>
+                        <Typography variant="h6">
+                            <Link style={{color: 'white', textDecoration: 'none',}} to="/home">Muun</Link>
+                        </Typography>
+                    </Grid>
+
+                    <Grid container item justify={'flex-end'}>
+                        <Avatar alt={'Milo Rue'} style={{backgroundColor: '#6F5FA0'}}>MR</Avatar>
+                    </Grid>
+
                 </Toolbar>
+
+                
             </AppBar>
 
-                <Grid container spacing={1} className={'container'} style={{backgroundColor: 'whitesmoke', marginTop: 55}}>
+                <Grid container spacing={1} className={'container'} style={{backgroundColor: '#374152', marginTop: 55}}>
 
                     {this.renderSidebar()}
 
                     {/*Content for rightmost area*/}
 
-                    <Grid item xs={12} sm={12} md={12} style={{backgroundColor: 'lightgrey', marginLeft: this.state.contentMargin}} className={'column'}>
+                    <Grid item xs={12} sm={12} md={12} style={{backgroundColor: '#374152', marginLeft: this.state.contentMargin}} className={'column'}>
 
 
 
