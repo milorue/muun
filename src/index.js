@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 
-import {Route, Link, BrowserRouter, HashRouter,} from 'react-router-dom'
+import {Route, Link, BrowserRouter, HashRouter, useHistory} from 'react-router-dom'
 
 import Login from "./pages/login";
 import Signup from "./pages/signup";
@@ -26,7 +26,7 @@ import Toolbar from '@material-ui/core/Toolbar';
 Stitch.initializeDefaultAppClient('muun-hizde');
 
 const routes = (
-        <HashRouter basename={'/'}>
+        <BrowserRouter basename={'/'} useHistory>
         <div>
 
 
@@ -38,7 +38,7 @@ const routes = (
             <Route path={'/home'} component={Home}/>
 
         </div>
-    </HashRouter>
+    </BrowserRouter>
 )
 
 

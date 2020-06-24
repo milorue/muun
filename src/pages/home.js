@@ -1038,7 +1038,7 @@ class Home extends Component{
                                     </Grid>
                                 </Grid>
 
-                                <TextField id={'active-note-name'} variant={"filled"} defaultValue={noteInfo.noteName} style={{marginTop: 10, marginBottom: 10, backgroundColor: 'white', borderRadius: 2}} onChange={() => this.handleMappedNotesName(event, index)}/>
+                                <TextField id={'active-note-name'} variant={"filled"} defaultValue={noteInfo.noteName} style={{marginTop: 10, marginBottom: 10, backgroundColor: 'white', borderRadius: 2}} onChange={() => this.handleMappedNotesName(event, index)} margin={'dense'}/>
                                 <Grid item xs={12}>
                                     <Grid item xs={12} style={{backgroundColor: 'whitesmoke', height: "inherit", padding: 10,}}>
                                         <TextField multiline fullWidth={true} variant={'filled'} className={'editor'} defaultValue={noteInfo.noteContent} rows={27} onChange={() => this.handleMappedNotesContent(event, index)}/>
